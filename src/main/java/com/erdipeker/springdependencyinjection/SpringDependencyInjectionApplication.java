@@ -1,9 +1,6 @@
 package com.erdipeker.springdependencyinjection;
 
-import com.erdipeker.springdependencyinjection.controllers.ConstructorInjectedController;
-import com.erdipeker.springdependencyinjection.controllers.MyController;
-import com.erdipeker.springdependencyinjection.controllers.PropertyInjectedController;
-import com.erdipeker.springdependencyinjection.controllers.SetterInjectedController;
+import com.erdipeker.springdependencyinjection.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -33,6 +30,10 @@ public class SpringDependencyInjectionApplication {
 
 		ConstructorInjectedController constructorInjectedController = (ConstructorInjectedController) ctx.getBean("constructorInjectedController");
 		System.out.println(constructorInjectedController.getGreeting());
+
+		System.out.println("-------- I18n");
+		I18nController i18nController=(I18nController) ctx.getBean("i18nController");
+		System.out.println(i18nController.sayHello());
 	}
 
 }
