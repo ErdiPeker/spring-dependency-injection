@@ -4,7 +4,9 @@ import com.erdipeker.springdependencyinjection.controllers.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.ComponentScan;
 
+@ComponentScan(basePackages = {"com.erdipeker.springdependencyinjection","com.erdipeker.pets"})
 @SpringBootApplication
 public class SpringDependencyInjectionApplication {
 
@@ -34,6 +36,10 @@ public class SpringDependencyInjectionApplication {
 		System.out.println("-------- I18n");
 		I18nController i18nController=(I18nController) ctx.getBean("i18nController");
 		System.out.println(i18nController.sayHello());
+
+		System.out.println("-------- The Best Pet is");
+		PetController petController = ctx.getBean("petController",PetController.class);
+		System.out.println(petController.getPetType());
 	}
 
 }
