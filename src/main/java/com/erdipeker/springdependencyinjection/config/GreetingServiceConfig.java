@@ -1,5 +1,8 @@
 package com.erdipeker.springdependencyinjection.config;
 
+
+import com.erdipeker.pets.PetService;
+import com.erdipeker.pets.PetServiceFactory;
 import com.erdipeker.springdependencyinjection.repositories.EnglishGreetingRepository;
 import com.erdipeker.springdependencyinjection.repositories.EnglishGreetingRepositoryImpl;
 import com.erdipeker.springdependencyinjection.repositories.SpanishGreetingRepository;
@@ -14,6 +17,22 @@ import org.springframework.context.annotation.Profile;
 public class GreetingServiceConfig {
 
 
+    @Bean
+    PetServiceFactory petServiceFactory(){
+        return new PetServiceFactory();
+    }
+
+    @Bean
+    @Profile({"dog","default"})
+    PetService dogPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("dog");
+    }
+
+    @Bean
+    @Profile({"cat"})
+    PetService catPetService(PetServiceFactory petServiceFactory){
+        return petServiceFactory.getPetService("cat");
+    }
 
     @Bean
     ConstructorGreetingService constructorGreetingService(){
