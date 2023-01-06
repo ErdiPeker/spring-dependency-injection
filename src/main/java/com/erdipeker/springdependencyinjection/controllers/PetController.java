@@ -11,7 +11,7 @@ public class PetController {
     private final PetService petService;
 
     @Autowired
-    public PetController(@Qualifier("catPetService") PetService petService) {
+    public PetController(PetService petService) {
         this.petService = petService;
     }
 
