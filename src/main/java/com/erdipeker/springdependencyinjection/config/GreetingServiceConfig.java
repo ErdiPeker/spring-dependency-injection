@@ -3,19 +3,29 @@ package com.erdipeker.springdependencyinjection.config;
 
 import com.erdipeker.pets.PetService;
 import com.erdipeker.pets.PetServiceFactory;
+import com.erdipeker.springdependencyinjection.datasource.FakeDataSource;
 import com.erdipeker.springdependencyinjection.repositories.EnglishGreetingRepository;
 import com.erdipeker.springdependencyinjection.repositories.EnglishGreetingRepositoryImpl;
 import com.erdipeker.springdependencyinjection.repositories.SpanishGreetingRepository;
 import com.erdipeker.springdependencyinjection.repositories.SpanishGreetingRepositoryImpl;
 import com.erdipeker.springdependencyinjection.services.*;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.context.annotation.Profile;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.*;
 
+
+@PropertySource("classpath:datasource.properties")
 @Configuration
 public class GreetingServiceConfig {
 
+    @Bean
+    FakeDataSource fakeDataSource(@Value("${com.username}")String username,@Value("${com.password}")String password,@Value("${com.jdbcurl}") String jdbcurl){
+        FakeDataSource fakeDataSource=new FakeDataSource();
+        fakeDataSource.setUsername(username);
+        fakeDataSource.setJdbcurl(jdbcurl);
+        fakeDataSource.setPassword(password);
+
+        return fakeDataSource;
+    }
 
     @Bean
     PetServiceFactory petServiceFactory(){

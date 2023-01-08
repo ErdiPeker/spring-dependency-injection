@@ -1,6 +1,7 @@
 package com.erdipeker.springdependencyinjection;
 
 import com.erdipeker.springdependencyinjection.controllers.*;
+import com.erdipeker.springdependencyinjection.datasource.FakeDataSource;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
@@ -38,6 +39,12 @@ public class SpringDependencyInjectionApplication {
 		System.out.println("-------- The Best Pet is");
 		PetController petController = ctx.getBean("petController",PetController.class);
 		System.out.println(petController.getPetType());
+
+
+		FakeDataSource fakeDataSource = ctx.getBean(FakeDataSource.class);
+		System.out.println(fakeDataSource.getUsername());
+		System.out.println(fakeDataSource.getPassword());
+		System.out.println(fakeDataSource.getJdbcurl());
 	}
 
 }
